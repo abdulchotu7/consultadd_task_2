@@ -20,7 +20,7 @@ The system follows a **relational model** with multiple interrelated tables ensu
 ![ER Diagram](movie_streaming_system/1_docs/ER_Diagram.jpg)
 
 ### ✅ **Class Diagram**
-![Class Diagram](Class_Diagram.jpg)
+![Class Diagram](movie_streaming_system/1_docs/Class_Diagram.jpg)
 
 ---
 ## 📂 Database Schema
