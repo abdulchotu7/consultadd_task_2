@@ -1,40 +1,30 @@
-# 🎬 Streaming Platform Database System
+# 🎮 Movie Streaming Platform
 
-## 📖 Overview
-This project implements a **PostgreSQL relational database** for a streaming platform. The system efficiently manages **users, profiles, movies, actors, billing, watch history, and support tickets** while maintaining strong data consistency and relationships.
+## 📚 Overview
+This project implements a **PostgreSQL relational database** for a streaming platform, managing **users, profiles, movies, actors, billing, watch history, and support tickets** while ensuring data consistency and relationships.
 
 ---
-## 📌 Features
-- **User Authentication & Management**
-- **Profile-based Viewing Preferences**
+## 🔗 Features
+- **User & Profile Management**
 - **Movie & Actor Database**
 - **Watch History Tracking**
-- **Billing & Subscription Plans**
-- **Support Ticket System**
-- **Liked Movies & Movie Actor Relationships**
+- **Billing & Subscription System**
+- **Support Ticketing System**
+- **Liked Movies & Actor-Movie Relationships**
 
 ---
-## 🏗️ Database Design
-The system follows a **relational model** with multiple **entities and relationships** ensuring data integrity.
+## 🛠️ Database Design
+The system follows a **relational model** with multiple interrelated tables ensuring data integrity.
 
-### **1️⃣ Entity-Relationship (ER) Diagram**
+### ✅ **ER Diagram**
 ![ER Diagram](ER_Diagram.jpg)
 
-
-- `User` has multiple `Profiles`
-- `Movie` has many-to-many relationships with `Actor`
-- `WatchHistory` tracks user activity
-- `Billing` ensures subscription management
-- `SupportTicket` allows issue tracking
-
-### **2️⃣ Class Diagram**
+### ✅ **Class Diagram**
 ![Class Diagram](Class_Diagram.jpg)
 
 ---
-## 🗂️ Database Schema
-The database consists of **multiple interrelated tables**:
-
-### **1️⃣ Users & Profiles**
+## 📂 Database Schema
+### **1. Users & Profiles**
 ```sql
 CREATE TABLE User (
     userId SERIAL PRIMARY KEY,
@@ -42,8 +32,7 @@ CREATE TABLE User (
     password VARCHAR(255) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL
 );
-```
-```sql
+
 CREATE TABLE Profile (
     profileId SERIAL PRIMARY KEY,
     userId INT NOT NULL,
@@ -53,7 +42,7 @@ CREATE TABLE Profile (
 );
 ```
 
-### **2️⃣ Movies & Actors**
+### **2. Movies & Actors**
 ```sql
 CREATE TABLE Movie (
     movieId SERIAL PRIMARY KEY,
@@ -63,8 +52,7 @@ CREATE TABLE Movie (
     boxOffice DECIMAL(12,2),
     liked BOOLEAN DEFAULT FALSE
 );
-```
-```sql
+
 CREATE TABLE Actor (
     actorId SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -73,7 +61,7 @@ CREATE TABLE Actor (
 );
 ```
 
-### **3️⃣ Many-to-Many Relationships**
+### **3. Many-to-Many Relationships**
 ```sql
 CREATE TABLE MovieActor (
     movieId INT NOT NULL,
@@ -82,8 +70,7 @@ CREATE TABLE MovieActor (
     FOREIGN KEY (movieId) REFERENCES Movie(movieId) ON DELETE CASCADE,
     FOREIGN KEY (actorId) REFERENCES Actor(actorId) ON DELETE CASCADE
 );
-```
-```sql
+
 CREATE TABLE LikedMovies (
     profileId INT NOT NULL,
     movieId INT NOT NULL,
@@ -93,7 +80,7 @@ CREATE TABLE LikedMovies (
 );
 ```
 
-### **4️⃣ Watch History & Billing**
+### **4. Watch History & Billing**
 ```sql
 CREATE TABLE WatchHistory (
     watchId SERIAL PRIMARY KEY,
@@ -105,8 +92,7 @@ CREATE TABLE WatchHistory (
     FOREIGN KEY (profileId) REFERENCES Profile(profileId) ON DELETE CASCADE,
     FOREIGN KEY (movieId) REFERENCES Movie(movieId)
 );
-```
-```sql
+
 CREATE TABLE Billing (
     billingId SERIAL PRIMARY KEY,
     userId INT UNIQUE NOT NULL,
@@ -118,7 +104,7 @@ CREATE TABLE Billing (
 );
 ```
 
-### **5️⃣ Support System & Admin Management**
+### **5. Support System & Admin Management**
 ```sql
 CREATE TABLE SupportTicket (
     ticketId SERIAL PRIMARY KEY,
@@ -129,8 +115,7 @@ CREATE TABLE SupportTicket (
     resolution TEXT,
     FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
 );
-```
-```sql
+
 CREATE TABLE Admin (
     adminId SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
@@ -140,26 +125,55 @@ CREATE TABLE Admin (
 ```
 
 ---
-## 📊 Query Examples
-### 🔹 **1️⃣ Get All Profiles for a User**
+## 📈 Sample Queries
+
+### ✨ **1. Insert Sample Data**
 ```sql
-SELECT * FROM Profile WHERE userId = 1;
+INSERT INTO User (username, password, email) VALUES ('john_doe', 'hashed_pass', 'john@example.com');
+INSERT INTO Profile (userId, name, type) VALUES (1, 'John Kid', 'Child');
+INSERT INTO Movie (title, rating, year, boxOffice, liked) VALUES ('Inception', 8.8, 2010, 829895144, TRUE);
+INSERT INTO Actor (name, dateOfBirth, bio) VALUES ('Leonardo DiCaprio', '1974-11-11', 'Hollywood actor');
+INSERT INTO MovieActor (movieId, actorId) VALUES (1, 1);
+INSERT INTO LikedMovies (profileId, movieId) VALUES (1, 1);
 ```
 
-### 🔹 **2️⃣ Retrieve Movies Liked by a Profile**
+### ✨ **2. Fetch All Movies**
 ```sql
-SELECT m.* FROM Movie m
+SELECT * FROM Movie;
+```
+
+### ✨ **3. Get Liked Movies of a Profile**
+```sql
+SELECT m.title FROM Movie m
 JOIN LikedMovies lm ON m.movieId = lm.movieId
-WHERE lm.profileId = 2;
+WHERE lm.profileId = 1;
 ```
 
-### 🔹 **3️⃣ Fetch Watch History of a Profile**
+### ✨ **4. Watch History of a Profile**
 ```sql
 SELECT w.*, m.title FROM WatchHistory w
 JOIN Movie m ON w.movieId = m.movieId
-WHERE w.profileId = 2;
+WHERE w.profileId = 1;
+```
+
+### ✨ **5. Retrieve All Users with Their Profiles**
+```sql
+SELECT u.username, p.name, p.type FROM User u
+JOIN Profile p ON u.userId = p.userId;
+```
+
+### ✨ **6. Sort Movies by Rating**
+```sql
+SELECT * FROM Movie ORDER BY rating DESC;
+```
+
+### ✨ **7. Filter Movies Released After 2000**
+```sql
+SELECT * FROM Movie WHERE year > 2000;
 ```
 
 ---
-
+## 👤 Author
+**Abdul Rahim**
+March 2025
 
