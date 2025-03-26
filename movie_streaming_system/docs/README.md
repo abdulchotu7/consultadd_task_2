@@ -18,7 +18,9 @@ This project implements a **PostgreSQL relational database** for a streaming pla
 The system follows a **relational model** with multiple **entities and relationships** ensuring data integrity.
 
 ### **1️⃣ Entity-Relationship (ER) Diagram**
-![ER Diagram](movie_streaming_system/docs/ER_Diagram.png)
+![ER Diagram](ER_Diagram.jpg)
+![Class Diagram](Class_Diagram.jpg)
+
 
 - `User` has multiple `Profiles`
 - `Movie` has many-to-many relationships with `Actor`
