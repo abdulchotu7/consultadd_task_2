@@ -17,7 +17,7 @@ This project implements a **PostgreSQL relational database** for a streaming pla
 The system follows a **relational model** with multiple interrelated tables ensuring data integrity.
 
 ### ✅ **ER Diagram**
-![ER Diagram](ER_Diagram.jpg)
+![ER Diagram](movie_streaming_system/1_docs/ER_Diagram.jpg)
 
 ### ✅ **Class Diagram**
 ![Class Diagram](Class_Diagram.jpg)
