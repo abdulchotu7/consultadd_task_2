@@ -1,6 +1,6 @@
 # 🎬 Movie Streaming System
 
-![Database Schema](docs/ER_Diagram.png)
+![Database Schema](/movie_streaming_system/docs/ER_Diagram.png)
 
 A comprehensive movie streaming platform with user profiles, content management, and subscription billing.
 
