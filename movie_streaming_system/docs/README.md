@@ -19,7 +19,6 @@ The system follows a **relational model** with multiple **entities and relations
 
 ### **1️⃣ Entity-Relationship (ER) Diagram**
 ![ER Diagram](ER_Diagram.jpg)
-![Class Diagram](Class_Diagram.jpg)
 
 
 - `User` has multiple `Profiles`
@@ -29,7 +28,7 @@ The system follows a **relational model** with multiple **entities and relations
 - `SupportTicket` allows issue tracking
 
 ### **2️⃣ Class Diagram**
-![Class Diagram](https://your-image-link.com)
+![Class Diagram](Class_Diagram.jpg)
 
 ---
 ## 🗂️ Database Schema
